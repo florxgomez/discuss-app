@@ -1,20 +1,16 @@
 'use client';
 
 import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
   NavbarItem,
-  Input,
   Button,
   Avatar,
   Popover,
   PopoverTrigger,
   PopoverContent,
 } from '@nextui-org/react';
-import Link from 'next/link';
 import * as actions from '@/actions';
 import { useSession } from 'next-auth/react';
+import FormButton from './common/FormButton';
 
 export default function HeaderAuth() {
   const session = useSession();
@@ -27,7 +23,10 @@ export default function HeaderAuth() {
     authContent = (
       <Popover placement="left">
         <PopoverTrigger>
-          <Avatar src={session.data.user.image || ''} />
+          <Avatar
+            src={session.data.user.image || ''}
+            className="cursor-pointer"
+          />
         </PopoverTrigger>
         <PopoverContent>
           <div className="p-4">
@@ -50,9 +49,7 @@ export default function HeaderAuth() {
         </NavbarItem>
         <NavbarItem>
           <form action={actions.signIn}>
-            <Button type="submit" color="primary" variant="flat">
-              Sign Up
-            </Button>
+            <FormButton>Sign Up</FormButton>
           </form>
         </NavbarItem>
       </>

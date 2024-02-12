@@ -14,7 +14,7 @@ export default function Home() {
       <div className="border shadow py-3 px-2">
         <TopicCreateForm />
         <Divider className="my-2" />
-        <h3 className="text-lg">Topics</h3>
+        <h3 className="text-lg mb-2 mt-4 font-bold">Topics</h3>
         <TopicList />
       </div>
     </div>
