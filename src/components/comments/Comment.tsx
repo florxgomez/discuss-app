@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import { Button } from '@nextui-org/react';
 import CommentCreateForm from '@/components/comments/CommentCreateForm';
-import { CommentWithAuthor } from '@/db/queries/comments';
+import { fetchCommentsByPostId } from '@/db/queries/comments';
 
 interface CommentShowProps {
   commentId: string;
-  comments: CommentWithAuthor[];
+  postId: string;
 }
 
-export default function Comment({ commentId, comments }: CommentShowProps) {
+export default async function Comment({ commentId, postId }: CommentShowProps) {
+  const comments = await fetchCommentsByPostId(postId);
   const comment = comments.find((c) => c.id === commentId);
 
   if (!comment) {
@@ -39,7 +40,7 @@ export default function Comment({ commentId, comments }: CommentShowProps) {
       <div className="pl-4">
         {children.map((child) => (
           // recursively calling Comment for children comments
-          <Comment key={child.id} commentId={child.id} comments={comments} />
+          <Comment key={child.id} commentId={child.id} postId={postId} />
         ))}
       </div>
     </div>
